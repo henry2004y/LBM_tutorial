@@ -1,0 +1,32 @@
+# LBM diffusion problem input parameters in TOML.
+
+# Problem Description
+# A two dimensional square slab is subjected to the given boundary conditions.
+# Initially the slab was at zero temperature. For time>0, the boundary at x = 0
+# is subjected to a high temperature of value 1.0 and other boundaries are kept
+# as before. The length of the domain is 100 units. Determine the temperature
+# distribution in the slab at time = 400 units (s).
+# Thermal diffusivity is 0.25 and xl = yl = 1.0.
+
+[Parameters]
+nD = 2			# Dimension of the system
+LatticeType = "D2Q9"	# Type of lattice
+dx = 1.0    # Spatial discretization
+dt = 1.0		# Timestep
+"α"  = 0.25	# Thermal diffusivity
+TotalTime = 400.0	# Total simulation time in lattice unit
+nI = 5	    #
+nJ = 5			#
+BCtype = "Dirichlet"	# Type of boundary conditions
+Tleft  = 1.0		#
+Tright = 0.0 		#
+Ttop   = 0.0		#
+Tbot   = 0.0		#
+
+[Plots]
+DoPlot = true
+
+PlotType = [
+  "y",
+  "2D"
+]

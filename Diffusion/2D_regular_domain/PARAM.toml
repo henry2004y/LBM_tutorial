@@ -1,0 +1,86 @@
+# LBM diffusion problem input parameters in TOML.
+
+# Problem Description
+# A two dimensional square slab is subjected to the given boundary conditions.
+# Initially the slab was at zero temperature. For time>0, the boundary at x = 0
+# is subjected to a high temperature of value 1.0 and other boundaries are kept
+# as before. The length of the domain is 100 units. Determine the temperature
+# distribution in the slab at time = 400 units (s).
+# Thermal diffusivity is 0.25 and xl = yl = 1.0.
+
+[Parameters]
+nD = 2			# Dimension of the system
+LatticeType = "D2Q4"	# Type of lattice
+dx = 1.0      		# Spatial discretization
+dt = 1.0		# Timestep
+"α"  = 0.25		# Thermal diffusivity
+TotalTime = 400.0	# Total simulation time in lattice unit
+BCtype = "Dirichlet"	# Type of boundary conditions
+Tleft  = 1.0		#
+Tright = 0.0 		#
+Ttop   = 0.0		#
+Tbot   = 0.0		#
+
+[Mesh]
+# I need a way to generate the mesh based on the boundaries!
+#
+# Storing format: (#node as column index) right left bottom top
+# Out-of-domain node indexes are negative
+# This is only for D2Q4
+connectivity = [[6, -1, -1, 2]
+          ,[7, -1, 1, 3]
+          ,[8, -1, 2, 4]
+          ,[9, -1, 3, 5]
+          ,[10, -1, 4, -1]
+          ,[11, 1, -1, 7]
+          ,[12, 2, 6, 8]
+          ,[13, 3, 7, 9]
+          ,[14, 4, 8, 10]
+          ,[15, 5, 9, -1]
+          ,[16, 6, -1, 12]
+          ,[17, 7, 11, 13]
+          ,[18, 8, 12, 14]
+          ,[19, 9 ,13, 15]
+          ,[20, 10, 14, -1]
+          ,[21, 11, -1, 17]
+          ,[22, 12, 16, 18]
+          ,[23, 13, 17, 19]
+          ,[24, 14, 18, 20]
+          ,[25, 15, 19, -1]
+          ,[26, 16, -1, 22]
+          ,[27, 17, 21, 23]
+          ,[28, 18, 22, 24]
+          ,[29, 19, 23, 25]
+          ,[30, 20, 24, -1]
+          ,[-1, 26, -1, 27]
+          ,[-1, 27, 26, 28]
+          ,[-1, 28, 27, 29]
+          ,[-1, 29, 28, 30]
+          ,[-1, 30, 29, -1]
+          ]
+
+coord = [[0.0,0.0],[0.0,1.0],[0.0,2.0],[0.0,3.0],[0.0,4.0]
+        ,[1.0,0.0],[1.0,1.0],[1.0,2.0],[1.0,3.0],[1.0,4.0]
+        ,[2.0,0.0],[2.0,1.0],[2.0,2.0],[2.0,3.0],[2.0,4.0]
+        ,[3.0,0.0],[3.0,1.0],[3.0,2.0],[3.0,3.0],[3.0,4.0]
+        ,[4.0,0.0],[4.0,1.0],[4.0,2.0],[4.0,3.0],[4.0,4.0]
+        ,[5.0,0.0],[5.0,1.0],[5.0,2.0],[5.0,3.0],[5.0,4.0]
+        ]
+
+BcNodeI1 = [1,2,3,4,5]
+BcNodeI2 = [16,17,18,19,20]
+BcNodeJ1 = [1,6,11,16,21,26]
+BcNodeJ2 = [5,10,15,20,25,30]
+
+
+
+# 1 for Dirichlet, 2 for Riemann
+BcType = [1,1,2,2]
+
+[Plots]
+DoPlot = true
+
+PlotType = [
+  "y",
+  "2D"
+]

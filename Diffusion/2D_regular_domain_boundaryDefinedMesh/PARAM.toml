@@ -1,0 +1,62 @@
+# LBM diffusion problem input parameters in TOML.
+
+# Problem Description
+# A two dimensional square slab is subjected to the given boundary conditions.
+# Initially the slab was at zero temperature. For time>0, the boundary at x = 0
+# is subjected to a high temperature of value 1.0 and other boundaries are kept
+# as before. The length of the domain is 100 units. Determine the temperature
+# distribution in the slab at time = 400 units (s).
+# Thermal diffusivity is 0.25 and xl = yl = 1.0.
+
+[Parameters]
+nD = 2			# Dimension of the system
+LatticeType = "D2Q4"	# Type of lattice
+dx = 1.0      		# Spatial discretization
+dt = 1.0		# Timestep
+"α"  = 0.25		# Thermal diffusivity
+TotalTime = 400.0	# Total simulation time in lattice unit
+#Temp = [0.0, 0.0, 0.0, 1.0]
+Temp = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0]
+
+[Mesh]
+# I need a way to generate the mesh based on the boundaries!
+#
+# Storing format: (#node as column index) right left bottom top
+# Out-of-domain node indexes are negative
+# This is only for D2Q4
+#BClines = [[0.0, 0.0, 1.0, 0.0]
+#          ,[1.0, 0.0, 1.0, 1.0]
+#          ,[1.0, 1.0, 0.0, 1.0]
+#          ,[0.0, 1.0, 0.0, 0.0]
+#]
+
+BClines = [[0.0,-0.2, 0.5,-0.2]
+          ,[0.5,-0.2, 0.5,-0.5]
+          ,[0.5,-0.5, 1.0,-0.5]
+          ,[1.0,-0.5, 1.0, 0.5]
+          ,[1.0, 0.5, 0.5, 0.5]
+          ,[0.5, 0.5, 0.5, 0.2]
+          ,[0.5, 0.2, 0.0, 0.2]
+          ,[0.0, 0.2, 0.0,-0.2]
+]
+
+# Type of boundary conditions
+# 1 for Dirichlet, 2 for Riemann
+BCtype = ["Dirichlet","Dirichlet","Dirichlet","Dirichlet",
+  "Dirichlet","Dirichlet","Dirichlet","Dirichlet"]
+
+#BCtype = ["Riemann","Riemann","Riemann","Dirichlet","Riemann","Riemann",
+#  "Riemann","Dirichlet"]
+
+#BCtype = ["Dirichlet","Dirichlet","Dirichlet","Dirichlet"]
+
+nI = 10
+nJ = 10
+
+[Plots]
+DoPlot = true
+
+PlotType = [
+  "y",
+  "2D"
+]
