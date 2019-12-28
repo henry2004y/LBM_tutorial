@@ -1,8 +1,8 @@
 # 2D Heat Diffusion
 # LBM
 #
-# This could only work on a rectangular region! To generalize to more
-# complicated mesh, I need 1D indexing of lattices.
+# Generalize version on complicated mesh, with 1D indexing of lattices.
+# Boundary is defined by edges.
 #
 # There are plenty of room to improve code performance, if needed.
 #
