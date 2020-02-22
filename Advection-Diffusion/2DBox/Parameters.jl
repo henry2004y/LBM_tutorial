@@ -24,14 +24,9 @@ struct Param
    BCtype::Array{Int,1}# Type of boundary conditions
    DoEcho::Bool        # Display parameters on screen
 
-   function Param(nD::Int=2,LatticeType::Int=3,dx::Float64=1.0,dy::Float64=1.0,
-      dt::Float64=1.0,
-      u::Vector{Float64}=[0.1,0.0],α::Float64=0.25,TotalTime::Float64=400.0,
-      nI::Int=100,nJ::Int=100,
-      Tᴸ::Float64=1.0,Tᴿ::Float64=0.0,
-      Tᴮ::Float64=0.0,Tᵀ::Float64=0.0,
-      BCtype::Vector{Int}=[1,1,1,1],
-      DoEcho::Bool=true)
+   function Param(nD=2, LatticeType=3, dx=1.0, dy=1.0, dt=1.0, u=[0.1,0.0],
+      α=0.25, TotalTime=400.0, nI=100, nJ=100, Tᴸ=1.0, Tᴿ:=0.0, Tᴮ=0.0, Tᵀ=0.0,
+      BCtype=[1,1,1,1], DoEcho=true)
       @assert(0 ≤ TotalTime, "Simulation time must be positive!")
 
       new(nD,LatticeType,dx,dy,dt,u,α,inv(nD*dt*α/dx^2 + 0.5),
