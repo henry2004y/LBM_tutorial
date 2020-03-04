@@ -60,8 +60,8 @@ while t < TotalTime
    feq[2,:] .= w[2].*T[:]
 
    # Collision
-   f[1,:] .= (1.0-ω).*f[1,:] .+ ω.*feq[1,:]
-   f[2,:] .= (1.0-ω).*f[2,:] .+ ω.*feq[2,:]
+   @. f[1,:] = (1.0-ω)*f[1,:] + ω*feq[1,:]
+   @. f[2,:] = (1.0-ω)*f[2,:] + ω*feq[2,:]
    if UseSource
       f[1,:] .+= Δt*w[1]*source
       f[2,:] .+= Δt*w[2]*source
@@ -81,7 +81,7 @@ while t < TotalTime
    end
 
    # Calculate macroscopic T
-   T .= f[1,:] .+ f[2,:]
+   @. T = f[1,:] + f[2,:]
 
    t += Δt
 end
