@@ -38,8 +38,8 @@ end
 To find orientation of ordered triplet (p, q, r).
 The function returns following values
 0 --> p, q and r are colinear
-1 --> Clockwise
-2 --> Counterclockwise
+1 --> clockwise
+2 --> counterclockwise
 """
 function orientation(p::Vector{Float64}, q::Vector{Float64}, r::Vector{Float64})
 
@@ -48,7 +48,7 @@ function orientation(p::Vector{Float64}, q::Vector{Float64}, r::Vector{Float64})
    if val == 0
       return 0 # colinear
    else
-      return val > 0 ? 1 : 2 # clock or counterclock wise
+      return val > 0 ? 1 : 2 # clockwise or counter-clockwise
    end
 end
 
@@ -77,12 +77,9 @@ function doIntersect(p1::Vector{Float64},q1::Vector{Float64},
    if o4 == 0 && onSegment(p2, q1, q2) return true end
 
    return false # Doesn't fall in any of the above cases
-
 end
 
-"""
-Returns true if the point p lies inside the polygon[] with n vertices
-"""
+"Returns true if the point p lies inside the polygon[] with n vertices."
 function isInside(point::Vector{Float64},BClines::Array{Float64,2})
 
    count = 0
